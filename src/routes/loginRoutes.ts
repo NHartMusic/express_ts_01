@@ -33,7 +33,24 @@ router.post('/login', (req: IRequestWithBody, res: Response) => {
    } else {
        res.send('Invalid email or password')
    }
-   
+})
+
+router.get('/', (req: Request, res: Response) => {
+    if (req.session && req.session.loggedIn) {
+        res.send(`
+            <div>
+                <div>You are logged in bro</div>
+                <a href="/logout">Logout</a>
+            </div>
+        `)
+    } else {
+        res.send(`
+            <div>
+                <div>You are not logged in bro</div>
+                <a href="/login">Log In</a>
+            </div>
+        `)
+    }
 })
 
 export { router }
